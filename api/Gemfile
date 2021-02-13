@@ -14,6 +14,19 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'bootsnap', '>= 1.4.4', require: false
 
+gem 'trailblazer'
+gem 'reform-rails'
+gem 'roar'
+gem 'multi_json'
+
+gem 'dry-auto_inject'
+
+gem 'rack-cors'
+
+gem 'graphql'
+gem 'graphiql-rails'
+gem 'batch-loader'
+
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.9'
 

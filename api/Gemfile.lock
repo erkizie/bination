@@ -62,6 +62,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    batch-loader (1.5.0)
     bcrypt (3.1.16)
     bindex (0.8.1)
     bootsnap (1.7.2)
@@ -80,6 +81,10 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    declarative (0.0.20)
+    declarative-builder (0.1.0)
+      declarative-option (< 0.2.0)
+    declarative-option (0.1.0)
     devise (4.7.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -89,6 +94,12 @@ GEM
     devise-jwt (0.5.9)
       devise (~> 4.0)
       warden-jwt_auth (~> 0.3.6)
+    disposable (0.4.7)
+      declarative (>= 0.0.9, < 1.0.0)
+      declarative-builder (< 0.2.0)
+      declarative-option (< 0.2.0)
+      representable (>= 2.4.0, <= 3.1.0)
+      uber (< 0.2.0)
     dry-auto_inject (0.7.0)
       dry-container (>= 0.3.4)
     dry-configurable (0.12.0)
@@ -103,6 +114,12 @@ GEM
     ffi (1.14.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    graphiql-rails (1.7.0)
+      railties
+      sprockets-rails
+    graphql (1.12.4)
+    hashie (4.1.0)
+    hirb (0.7.3)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -124,6 +141,7 @@ GEM
     mini_portile2 (2.5.0)
     minitest (5.14.3)
     msgpack (1.4.2)
+    multi_json (1.15.0)
     nio4r (2.5.5)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
@@ -141,6 +159,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.1)
       rack (>= 1.2.0)
     rack-proxy (0.6.5)
@@ -177,10 +197,23 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    reform (2.3.3)
+      disposable (>= 0.4.2, < 0.5.0)
+      representable (>= 2.4.0, < 3.1.0)
+      uber (< 0.2.0)
+    reform-rails (0.2.1)
+      activemodel (>= 5.0)
+      reform (>= 2.3.1, < 3.0.0)
     regexp_parser (2.0.3)
+    representable (3.0.4)
+      declarative (< 0.1.0)
+      declarative-option (< 0.2.0)
+      uber (< 0.2.0)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    roar (1.1.0)
+      representable (~> 3.0.0)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -206,11 +239,37 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.1.0)
     tilt (2.0.10)
+    trailblazer (2.1.0)
+      trailblazer-macro (>= 2.1.0, < 2.2.0)
+      trailblazer-macro-contract (>= 2.1.0, < 2.2.0)
+      trailblazer-operation
+    trailblazer-activity (0.11.5)
+      trailblazer-context (>= 0.3.1, < 0.4.0)
+    trailblazer-activity-dsl-linear (0.3.4)
+      trailblazer-activity (>= 0.11.3, < 1.0.0)
+    trailblazer-context (0.3.1)
+      hashie (~> 4.1)
+    trailblazer-developer (0.0.20)
+      hirb
+      representable
+      trailblazer-activity (>= 0.11.0, < 1.0.0)
+      trailblazer-activity-dsl-linear
+    trailblazer-macro (2.1.4)
+      trailblazer-activity (>= 0.11.2, < 1.0.0)
+      trailblazer-activity-dsl-linear (>= 0.3.3, < 1.0.0)
+      trailblazer-operation (>= 0.6.5)
+    trailblazer-macro-contract (2.1.0)
+      reform (>= 2.2.0, < 3.0.0)
+    trailblazer-operation (0.6.6)
+      trailblazer-activity (>= 0.11.2, < 1.0.0)
+      trailblazer-activity-dsl-linear (>= 0.3.2, < 1.0.0)
+      trailblazer-developer (>= 0.0.8)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
     turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    uber (0.1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     warden-jwt_auth (0.3.6)
@@ -243,21 +302,30 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  batch-loader
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
   devise
   devise-jwt (~> 0.5.9)
+  dry-auto_inject
+  graphiql-rails
+  graphql
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  multi_json
   pg (>= 0.18, < 2.0)
   pry-byebug
   puma (~> 5.0)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.2, >= 6.1.2.1)
+  reform-rails
+  roar
   sass-rails (>= 6)
   selenium-webdriver
   spring
+  trailblazer
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)
