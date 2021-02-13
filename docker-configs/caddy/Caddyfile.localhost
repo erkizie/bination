@@ -1,0 +1,25 @@
+localhost:80 {
+  proxy /api api:3000 {
+    transparent
+    without /api
+  }
+  proxy /assets/graphiql api:3000 {
+    transparent
+  }
+  proxy /graphql api:3000 {
+    transparent
+  }
+}
+
+6f331f00ace4.ngrok.io:80 {
+  proxy /api api:3000 {
+    transparent
+    without /api
+  }
+  proxy /assets/graphiql api:3000 {
+    transparent
+  }
+  proxy /graphql api:3000 {
+    transparent
+  }
+}
