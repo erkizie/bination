@@ -1,0 +1,20 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore Jasmine headless cache
+/.jhw-cache
+
+# Ignore all logfiles and tempfiles.
+/logs/*.log
+/tmp/*
+!/tmp/.gitkeep
+
+.idea
+.env
+
+#ignore vim swp files
+*.swp
+.env.local
+Guardfile
+
+.DS_Store

@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+#  caddy:
+#    image: abiosoft/caddy:0.10.14
+#    volumes:
+#      - ./docker-configs/caddy/Caddyfile.localhost:/etc/Caddyfile:cached
+#    ports:
+#      - 80:80
+
+  api:
+    container_name: bination_api
+    build:
+      context: ./api
+    command: sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./api:/api:cached
+      - api-gems:/usr/local/bundle:cached
+    ports:
+      - 3000:3000
+    env_file: .env
+    environment:
+      API_RAILS_ENV: ${ENV_MODE}
+    depends_on:
+      - db
+    networks:
+      - default
+
+  db:
+    container_name: bination_db
+    image: postgres:12-alpine
+    ports:
+      - 5433:5432
+    env_file: .env
+    volumes:
+      - .:/web:cached
+      - db-data:/var/lib/postgresql/data:cached
+    networks:
+      - default
+
+volumes:
+  api-gems:
+  db-data:
