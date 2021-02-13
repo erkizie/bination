@@ -1,4 +1,4 @@
-module Types
+module Lib
   class BaseScalar < GraphQL::Schema::Scalar
   end
 end
