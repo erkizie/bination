@@ -29,6 +29,7 @@ gem 'batch-loader'
 
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.9'
+gem 'dry-configurable', '0.9.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
