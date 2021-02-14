@@ -4,11 +4,11 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.expiration_time = 3600 # 1 hour
+    jwt.expiration_time = 86400 # 24 hours
     jwt.dispatch_requests = [ ['POST', %r{/graphql}] ]
   end
 
-  config.secret_key = '033c351fccb934aea78d5b78337b7a924be18a099aa977242fb767d4b2fe35af309dfe6db826df5792e2ee6017bf4a249a554df625eaabe725ec0ce5443c1402'
+  config.secret_key = 'a97b66e9c1880fb25f79e60ddaa73e12a744ea63d8ff1f04468624982264e23c9f539de6f23761fa563444c02a5a561099157657b7c9cc13f7a3b429e832edd2'
 
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
