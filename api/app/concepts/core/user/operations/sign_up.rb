@@ -11,7 +11,7 @@ module Core
           property :password
 
           validates :username, :email, :password, presence: true
-          validates :password, length: { minimum: 6 }
+          validates :password, length: { minimum: 8 }
           validates_uniqueness_of :email
           validates_uniqueness_of :username
         end
