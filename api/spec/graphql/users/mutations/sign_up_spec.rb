@@ -57,11 +57,11 @@ describe 'SignUp', type: :mutation do
         )
       end
 
-      it 'should return no errors' do
+      it 'should return an error' do
         expect(gql_response.errors[0]["message"]).to include("Expected value to not be null")
       end
 
-      it 'should return the user object' do
+      it 'should not return the user object' do
         expect(gql_response.data).to be_nil
       end
     end
