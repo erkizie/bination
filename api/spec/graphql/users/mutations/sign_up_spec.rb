@@ -1,5 +1,5 @@
 require 'rails_helper'
-require_relative '../../../test_helpers/graphql_spec_helper'
+require_relative '../../../support/graphql_spec_helper'
 include GraphQL::TestHelpers
 
 describe 'SignUp', type: :mutation do
