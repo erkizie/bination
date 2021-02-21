@@ -6,8 +6,8 @@ describe 'SignIn', type: :mutation do
   describe 'Sign in User' do
 
     let(:user) { create(:user) }
-    let(:mutation_type) {"signIn"}
-    let(:mutation_string) {<<-GQL
+    let(:mutation_type) { "signIn" }
+    let(:mutation_string) { <<-GQL
         mutation signIn($input: SignInInput!){
          signIn(input: $input) {
             token
@@ -21,7 +21,7 @@ describe 'SignIn', type: :mutation do
     GQL
     }
 
-    context 'successfully logins user' do
+    context 'valid credentials for user' do
 
       before do
         mutation(
@@ -35,16 +35,16 @@ describe 'SignIn', type: :mutation do
         )
       end
 
-      it 'should return no errors' do
+      it 'return no errors' do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'should return the user object' do
+      it 'returns the user object' do
         expect(gql_response.data[mutation_type]["user"]).to include("username" => user.username, "email" => user.email)
       end
     end
 
-    context 'invalid credentials for user login' do
+    context 'invalid credentials for user' do
 
       before do
         mutation(
@@ -58,11 +58,11 @@ describe 'SignIn', type: :mutation do
         )
       end
 
-      it 'should return an error' do
+      it 'returns an error' do
         expect(gql_response.errors[0]["message"]).to include("Invalid password")
       end
 
-      it 'should not return the object' do
+      it "doesn't return the object" do
         expect(gql_response.data[mutation_type]).to be_nil
       end
     end

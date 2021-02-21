@@ -2,12 +2,12 @@ require 'rails_helper'
 require_relative '../../../support/graphql_spec_helper'
 include GraphQL::TestHelpers
 
-describe 'SignOut', type: :request do
+describe 'SignOut', type: :mutation do
   describe 'Sign out User' do
 
     let(:user) { create(:user) }
-    let(:mutation_type) {"signOut"}
-    let(:mutation_string) {<<-GQL
+    let(:mutation_type) { "signOut" }
+    let(:mutation_string) { <<-GQL
         mutation signOut($input: SignOutInput!){
           signOut(input: $input) {
             result
@@ -16,7 +16,7 @@ describe 'SignOut', type: :request do
     GQL
     }
 
-    context 'successfully sign out user' do
+    context 'user is signed in' do
 
       before do
         mutation(
@@ -31,11 +31,11 @@ describe 'SignOut', type: :request do
         )
       end
 
-      it 'should return no errors' do
+      it 'returns no errors' do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'should be successful' do
+      it 'has successful result' do
         expect(gql_response.data[mutation_type]["result"]).to be_truthy
       end
     end
@@ -52,11 +52,11 @@ describe 'SignOut', type: :request do
         )
       end
 
-      it 'should return errors' do
+      it 'returns an errors' do
         expect(gql_response.errors[0]["message"]).to include("User not signed in")
       end
 
-      it 'should not return the object' do
+      it "doesn't return the object" do
         expect(gql_response.data[mutation_type]).to be_nil
       end
     end
