@@ -9,7 +9,7 @@ module Core
           property :password
 
           validates :password, presence: true
-          validates :password, length: { minimum: 6 }
+          validates :password, length: { minimum: 8 }
         end
 
         step :validate
