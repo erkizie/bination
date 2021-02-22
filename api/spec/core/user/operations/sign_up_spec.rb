@@ -1,5 +1,4 @@
 require 'rails_helper'
-require_relative '../../../../app/concepts/core/user/operations/sign_up'
 
 RSpec.describe Core::User::Operations::SignUp do
   let(:params) {
