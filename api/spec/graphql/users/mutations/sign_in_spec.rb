@@ -2,13 +2,15 @@ require 'rails_helper'
 require_relative '../../../support/graphql_spec_helper'
 include GraphQL::TestHelpers
 
-describe 'SignUp', type: :mutation do
-  describe 'Creating a User' do
+describe 'SignIn', type: :mutation do
+  describe 'Sign in User' do
 
-    let(:mutation_type) { "signUp" }
+    let(:user) { create(:user) }
+    let(:mutation_type) { "signIn" }
     let(:mutation_string) { <<-GQL
-        mutation signUp($input: SignUpInput!){
-         signUp(input: $input) {
+        mutation signIn($input: SignInInput!){
+         signIn(input: $input) {
+            token
             user {
               id
               username
@@ -26,20 +28,19 @@ describe 'SignUp', type: :mutation do
           mutation_string,
           variables: {
             input: {
-              email: "postman1337@test.com",
-              username: "postman1337",
-              password: "password"
+              username: user.username,
+              password: user.password
             }
           }
         )
       end
 
-      it 'returns no errors' do
+      it 'return no errors' do
         expect(gql_response.errors).to be_nil
       end
 
       it 'returns the user object' do
-        expect(gql_response.data[mutation_type]["user"]).to include("username" => "postman1337")
+        expect(gql_response.data[mutation_type]["user"]).to include("username" => user.username, "email" => user.email)
       end
     end
 
@@ -50,7 +51,7 @@ describe 'SignUp', type: :mutation do
           mutation_string,
           variables: {
             input: {
-              username: "postman1337",
+              username: user.username,
               password: "password"
             }
           }
@@ -58,11 +59,11 @@ describe 'SignUp', type: :mutation do
       end
 
       it 'returns an error' do
-        expect(gql_response.errors[0]["message"]).to include("Expected value to not be null")
+        expect(gql_response.errors[0]["message"]).to include("Invalid password")
       end
 
-      it "doesn't return the user object" do
-        expect(gql_response.data).to be_nil
+      it "doesn't return the object" do
+        expect(gql_response.data[mutation_type]).to be_nil
       end
     end
   end
