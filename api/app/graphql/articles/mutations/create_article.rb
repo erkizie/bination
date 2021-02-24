@@ -5,7 +5,7 @@ module Articles::Mutations
     argument :body,        String, required: true
     argument :description, String, required: true
 
-    field :article, Lib::Objects::Article,   null: true
+    field :article,  Lib::Objects::Article,   null: true
     field :errors,   [Lib::Objects::Error],    null: true
 
     def ready?(**args)
@@ -21,12 +21,7 @@ module Articles::Mutations
     private
 
     def params(args)
-      {
-        title: args[:title],
-        body: args[:body],
-        description: args[:description],
-        user_id: context[:current_user].id
-      }
+      args.merge(user_id: context[:current_user].id)
     end
 
     def self.auth_required?
