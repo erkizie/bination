@@ -21,7 +21,7 @@ describe 'SignIn', type: :mutation do
     GQL
     }
 
-    context 'valid credentials for user' do
+    context 'valid credentials for user login' do
 
       before do
         mutation(
@@ -44,7 +44,7 @@ describe 'SignIn', type: :mutation do
       end
     end
 
-    context 'invalid credentials for user' do
+    context 'invalid credentials for user login' do
 
       before do
         mutation(

@@ -20,7 +20,7 @@ describe 'SignOut', type: :request do
     GQL
     }
 
-    context 'valid credentials for signed in user' do
+    context 'valid credentials for signed in user update' do
 
       before do
         mutation(

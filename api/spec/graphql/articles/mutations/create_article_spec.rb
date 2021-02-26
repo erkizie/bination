@@ -22,7 +22,7 @@ describe 'CreateArticle', type: :mutation do
     GQL
     }
 
-    context 'valid input for article' do
+    context 'valid input for article creation' do
 
       before do
         mutation(
@@ -49,7 +49,7 @@ describe 'CreateArticle', type: :mutation do
       end
     end
 
-    context 'invalid input for article' do
+    context 'invalid input for article creation' do
 
       before do
         mutation(
