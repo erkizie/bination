@@ -58,7 +58,7 @@ describe 'SignOut', type: :request do
         )
       end
 
-      it 'returns no errors' do
+      it 'returns an error' do
         expect(gql_response.errors[0]["message"]).to include("User not signed in")
       end
     end

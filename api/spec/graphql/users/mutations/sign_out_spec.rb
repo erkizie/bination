@@ -35,7 +35,7 @@ describe 'SignOut', type: :mutation do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'has successful result' do
+      it 'successfully logouts user' do
         expect(gql_response.data[mutation_type]["result"]).to be_truthy
       end
     end
@@ -56,7 +56,7 @@ describe 'SignOut', type: :mutation do
         expect(gql_response.errors[0]["message"]).to include("User not signed in")
       end
 
-      it "doesn't return the object" do
+      it "doesn't logout user" do
         expect(gql_response.data[mutation_type]).to be_nil
       end
     end

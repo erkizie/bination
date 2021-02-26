@@ -38,7 +38,7 @@ describe 'SignUp', type: :mutation do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'returns the user object' do
+      it 'creates a user' do
         expect(gql_response.data[mutation_type]["user"]).to include("username" => "postman1337")
       end
     end
@@ -61,7 +61,7 @@ describe 'SignUp', type: :mutation do
         expect(gql_response.errors[0]["message"]).to include("Expected value to not be null")
       end
 
-      it "doesn't return the user object" do
+      it "doesn't create a user" do
         expect(gql_response.data).to be_nil
       end
     end

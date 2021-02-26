@@ -39,7 +39,7 @@ describe 'SignIn', type: :mutation do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'returns the user object' do
+      it 'logins user' do
         expect(gql_response.data[mutation_type]["user"]).to include("username" => user.username, "email" => user.email)
       end
     end
@@ -62,7 +62,7 @@ describe 'SignIn', type: :mutation do
         expect(gql_response.errors[0]["message"]).to include("Invalid password")
       end
 
-      it "doesn't return the object" do
+      it "doesn't login user" do
         expect(gql_response.data[mutation_type]).to be_nil
       end
     end

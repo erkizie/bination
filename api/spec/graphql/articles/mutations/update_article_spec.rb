@@ -2,14 +2,16 @@ require 'rails_helper'
 require_relative '../../../support/graphql_spec_helper'
 include GraphQL::TestHelpers
 
-describe 'CreateArticle', type: :mutation do
-  describe 'Create an Article' do
+describe 'UpdateArticle', type: :mutation do
+  describe 'Update an Article' do
 
     let(:user) { create(:user) }
-    let(:mutation_type) { "createArticle" }
+    let(:user_2) { create(:user) }
+    let(:article) { create(:article, user: user) }
+    let(:mutation_type) { "updateArticle" }
     let(:mutation_string) { <<-GQL
-        mutation createArticle($input: CreateArticleInput!) {
-          createArticle(input: $input) {
+        mutation updateArticle($input: UpdateArticleInput!) {
+          updateArticle(input: $input) {
             article {
                 id
                 title
@@ -22,16 +24,15 @@ describe 'CreateArticle', type: :mutation do
     GQL
     }
 
-    context 'valid input for article creation' do
+    context 'valid input for article update' do
 
       before do
         mutation(
           mutation_string,
           variables: {
             input: {
-              title: "Test title",
-              description: "Test description",
-              body: "Test body"
+              id: article.id,
+              title: "Test title"
             }
           },
           context: {
@@ -44,34 +45,35 @@ describe 'CreateArticle', type: :mutation do
         expect(gql_response.errors).to be_nil
       end
 
-      it 'creates an article' do
-        expect(gql_response.data[mutation_type]["article"]).to include("title" => "Test title", "description" => "Test description", "body" => "Test body", "userId" => user.id.to_s)
+      it 'updates an article' do
+        expect(gql_response.data[mutation_type]["article"]).to include("title" => "Test title", "description" => article.description, "body" => article.body, "userId" => user.id.to_s)
       end
     end
 
-    context 'invalid input for article creation' do
+    context 'user is not author of the article' do
 
       before do
         mutation(
           mutation_string,
           variables: {
             input: {
+              id: article.id,
               description: "Test description",
               body: "Test body"
             }
           },
           context: {
-            current_user: user
+            current_user: user_2
           }
         )
       end
 
       it 'returns an error' do
-        expect(gql_response.errors[0]["message"]).to include("Expected value to not be null")
+        expect(gql_response.errors[0]["message"]).to include("Only owner can update")
       end
 
-      it "doesn't create an article" do
-        expect(gql_response.data).to be_nil
+      it "doesn't update the article object" do
+        expect(gql_response.data[mutation_type]).to be_nil
       end
     end
   end
