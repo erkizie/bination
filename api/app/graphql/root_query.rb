@@ -1,3 +1,3 @@
 class RootQuery < Lib::BaseObject
-  field :articles, resolver: ::Articles::Resolvers::Index, description: 'Articles'
+  field :articles, resolver: ::Articles::Resolvers::ListArticles, description: 'Articles'
 end

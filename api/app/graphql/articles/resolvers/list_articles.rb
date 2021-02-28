@@ -1,5 +1,5 @@
 module Articles::Resolvers
-  class Index < ::Lib::BaseResolver
+  class ListArticles < ::Lib::BaseResolver
 
     type [Lib::Objects::Article], null: false
 
