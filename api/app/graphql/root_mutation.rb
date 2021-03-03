@@ -7,4 +7,5 @@ class RootMutation < Lib::BaseObject
 
   field :create_article, mutation: ::Articles::Mutations::CreateArticle
   field :update_article, mutation: ::Articles::Mutations::UpdateArticle
+  field :delete_article, mutation: ::Articles::Mutations::DeleteArticle
 end
