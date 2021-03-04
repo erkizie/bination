@@ -49,29 +49,27 @@ describe 'CreateArticle', type: :mutation do
       end
     end
 
-    context 'invalid input for article creation' do
+    context 'user is not signed in' do
 
       before do
         mutation(
           mutation_string,
           variables: {
             input: {
+              title: "Test title",
               description: "Test description",
               body: "Test body"
             }
-          },
-          context: {
-            current_user: user
           }
         )
       end
 
       it 'returns an error' do
-        expect(gql_response.errors[0]["message"]).to include("Expected value to not be null")
+        expect(gql_response.errors[0]["message"]).to include("User not signed in")
       end
 
       it "doesn't create an article" do
-        expect(gql_response.data).to be_nil
+        expect(gql_response.data[mutation_type]).to be_nil
       end
     end
   end
