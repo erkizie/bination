@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import Button from '@material-ui/core/Button'
 
 const SignUpForm = ({user}) => {
   return (
@@ -23,7 +24,7 @@ const SignUpForm = ({user}) => {
               value={user.password}>
           </input>
           <br />
-          <button
+          <Button
               className="signUpSubmit"
               primary={true}
               type="submit"
