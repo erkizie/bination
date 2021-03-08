@@ -1,8 +1,9 @@
 FROM node:13.12.0-alpine
 
-ENV APP_ROOT /frontend
-RUN mkdir $APP_ROOT
-WORKDIR $APP_ROOT
+RUN mkdir /frontend
+WORKDIR /frontend
+
+ENV PATH /frontend/node_modules/.bin:$PATH
 
 COPY package.json ./
 RUN npm install --silent
