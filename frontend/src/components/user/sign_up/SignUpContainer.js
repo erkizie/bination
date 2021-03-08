@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import SignUpForm from "./SignUpForm.js";
+import React, {Component} from 'react';
+import SignUpForm from './SignUpForm.js';
 
 class SignUpContainer extends Component {
   constructor(props) {
@@ -7,10 +7,10 @@ class SignUpContainer extends Component {
 
     this.state = {
       user: {
-        username: "",
-        email: "",
-        password: ""
-      }
+        username: '',
+        email: '',
+        password: '',
+      },
     };
 
   }

@@ -1,40 +1,46 @@
-import React from "react";
-import "./style.css";
-import Button from '@material-ui/core/Button'
+import React from 'react';
+import './style.css';
+import TextField from '@material-ui/core/TextField';
 
 const SignUpForm = ({user}) => {
   return (
       <div className="loginBox">
         <h1>Sign Up</h1>
-
         <form>
-          <input
-              name="username"
-              floatingLabelText="user name"
-              value={user.username}>
-          </input>
-          <input
-              name="email"
-              floatingLabelText="email"
-              value={user.email}>
-          </input>
-          <input
-              name="password"
-              floatingLabelText="password"
-              value={user.password}>
-          </input>
-          <br />
-          <Button
-              className="signUpSubmit"
-              primary={true}
-              type="submit"
-              label="submit"
-          />
+          <div className="inputElement">
+            <TextField
+                name="username"
+                label="user name"
+                value={user.username}
+            />
+          </div>
+          <div className="inputElement">
+            <TextField
+                className="inputField"
+                name="email"
+                label="email"
+                value={user.email}
+            />
+          </div>
+          <div className="inputElement">
+            <TextField
+                name="password"
+                label="password"
+                value={user.password}
+            />
+          </div>
+          <div className="inputElement">
+            <button type="button" className="btn btn-info btn-sm">
+              Register
+            </button>
+          </div>
         </form>
-        <p>
-          Already have an account? <br />
-          <a href="/">Log in here</a>
-        </p>
+        <div>
+          <p>
+            Already have an account? <br/>
+            <a href="/">Log in here</a>
+          </p>
+        </div>
       </div>
   );
 };
