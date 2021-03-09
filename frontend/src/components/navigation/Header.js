@@ -32,7 +32,7 @@ export default function Header() {
   return (
       <React.Fragment>
         <Toolbar className={classes.toolbar}>
-          <Button size="small">Subscribe</Button>
+          <Button size="small" href="https://github.com/erkizie" target="_blank">Subscribe</Button>
           <Typography
               component="h2"
               variant="h5"
