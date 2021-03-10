@@ -9,6 +9,15 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { Link as ReactLink } from 'react-router-dom';
 
+const sections = [
+  { title: 'Articles', url: '#' },
+  { title: 'Exchange Rates', url: '#' },
+  { title: 'Rate Hunter', url: '#' },
+  { title: 'Policies', url: '#' },
+  { title: 'About', url: '#' },
+  { title: 'Contact Us', url: '#' }
+];
+
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
@@ -53,16 +62,18 @@ export default function Header() {
           </Button>
         </Toolbar>
         <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
+          {sections.map((section) => (
               <Link
                   color="inherit"
                   noWrap
-                  key="home"
+                  key={section.title}
                   variant="body2"
-                  href="/"
+                  href={section.url}
                   className={classes.toolbarLink}
               >
-                Home
+                {section.title}
               </Link>
+          ))}
         </Toolbar>
       </React.Fragment>
   );
