@@ -22,6 +22,7 @@ class SignUpContainer extends Component {
 
     this.pwMask = this.pwMask.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.submitSignup = this.submitSignup.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.pwHandleChange = this.pwHandleChange.bind(this);
   }
@@ -61,6 +62,10 @@ class SignUpContainer extends Component {
     }
   }
 
+  submitSignup(user) {
+    console.log(user + 'test');
+  }
+
   validateForm(event) {
     event.preventDefault();
     let payload = validateSignUpForm(event, this.state.user);
@@ -73,6 +78,7 @@ class SignUpContainer extends Component {
         pw: this.state.user.password,
         email: this.state.user.email,
       };
+      this.submitSignup(user);
     } else {
       const errors = payload.errors;
       this.setState({
