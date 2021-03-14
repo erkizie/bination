@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SignUpForm from './SignUpForm.js';
+import zxcvbn from 'zxcvbn';
 
 class SignUpContainer extends Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class SignUpContainer extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.pwHandleChange = this.pwHandleChange.bind(this);
   }
 
   handleChange(event) {
@@ -31,12 +33,38 @@ class SignUpContainer extends Component {
     });
   }
 
+  pwHandleChange(event) {
+    const field = event.target.name;
+    const user = this.state.user;
+    user[field] = event.target.value;
+
+    this.setState({
+      user,
+    });
+
+    if (event.target.value === '') {
+      this.setState(state =>
+          Object.assign({}, state, {
+            score: 'null',
+          }),
+      );
+    } else {
+      let pw = zxcvbn(event.target.value);
+      this.setState(state =>
+          Object.assign({}, state, {
+            score: pw.score + 1,
+          }),
+      );
+    }
+  }
+
 
   render() {
     return (
         <div>
           <SignUpForm
               onChange={this.handleChange}
+              onPwChange={this.pwHandleChange}
               errors={this.state.errors}
               user={this.state.user}
               score={this.state.score}
