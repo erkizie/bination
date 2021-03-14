@@ -1,8 +1,8 @@
 import React from 'react';
 
 const PasswordStr = props => {
-  var strColor;
-  var strWidth;
+  let strColor;
+  let strWidth;
 
   switch (props.score) {
     case 1:
@@ -28,7 +28,7 @@ const PasswordStr = props => {
     default:
   }
 
-  var style = { backgroundColor: strColor, height: '5px', width: strWidth, transition: 'all 300ms ease-in-out' }
+  let style = { backgroundColor: strColor, height: '5px', width: strWidth, transition: 'all 300ms ease-in-out' }
 
   return (
       <div>
