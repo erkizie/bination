@@ -17,7 +17,33 @@ form {
 }
 
 .inputElement {
-    padding: 10px 0;
+    padding: 10px 0 !important;
+}
+
+.pwStrRow {
+    width: 63%;
+    text-align: left;
+    margin: auto;
+    padding: 0;
+    font-size: 12px;
+}
+
+.pwStrWeak {
+    display: inline-block;
+    position: relative;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    color: gray;
+}
+
+.pwStrStrong {
+    display: inline-block;
+    position: relative;
+    left: 77%;
+    padding: 0;
+    margin: 0;
+    color: gray;
 }
 
 @media screen and (max-width: 550px) {
