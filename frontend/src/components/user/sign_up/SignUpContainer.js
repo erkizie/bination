@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SignUpForm from './SignUpForm.js';
+import validateSignUpForm from './lib/validate';
 import zxcvbn from 'zxcvbn';
 
 class SignUpContainer extends Component {
@@ -21,6 +22,7 @@ class SignUpContainer extends Component {
 
     this.pwMask = this.pwMask.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.validateForm = this.validateForm.bind(this);
     this.pwHandleChange = this.pwHandleChange.bind(this);
   }
 
@@ -59,6 +61,26 @@ class SignUpContainer extends Component {
     }
   }
 
+  validateForm(event) {
+    event.preventDefault();
+    let payload = validateSignUpForm(event, this.state.user);
+    if (payload.success) {
+      this.setState({
+        errors: {},
+      });
+      let user = {
+        usr: this.state.user.username,
+        pw: this.state.user.password,
+        email: this.state.user.email,
+      };
+    } else {
+      const errors = payload.errors;
+      this.setState({
+        errors,
+      });
+    }
+  }
+
   pwMask(event) {
     event.preventDefault();
     this.setState(state =>
@@ -73,6 +95,7 @@ class SignUpContainer extends Component {
     return (
         <div>
           <SignUpForm
+              onSubmit={this.validateForm}
               onChange={this.handleChange}
               onPwChange={this.pwHandleChange}
               errors={this.state.errors}
