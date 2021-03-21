@@ -32,7 +32,7 @@ const SignUpForm = ({
                   <div className="invalid-feedback">
                     {errors.username}
                   </div>
-                  <div className="valid-feedback">Looks good!</div>
+                  
                 </MDBInput>
                 <MDBInput name="email"
                           className="inputElement"
@@ -44,7 +44,7 @@ const SignUpForm = ({
                   <div className="invalid-feedback">
                     {errors.email}
                   </div>
-                  <div className="valid-feedback">Looks good!</div>
+                  
                 </MDBInput>
                 <MDBInput type={type}
                           name="password"
@@ -56,7 +56,7 @@ const SignUpForm = ({
                   <div className="invalid-feedback">
                     {errors.password}
                   </div>
-                  <div className="valid-feedback">Looks good!</div>
+                  
                 </MDBInput>
 
                 <div className="pwStrRow">
@@ -85,7 +85,7 @@ const SignUpForm = ({
                   <div className="invalid-feedback">
                     {errors.pwconfirm}
                   </div>
-                  <div className="valid-feedback">Looks good!</div>
+                  
                 </MDBInput>
 
               </div>

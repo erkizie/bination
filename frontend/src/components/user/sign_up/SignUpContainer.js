@@ -22,7 +22,7 @@ class SignUpContainer extends Component {
 
     this.pwMask = this.pwMask.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.submitSignup = this.submitSignup.bind(this);
+    this.submitForm = this.submitForm.bind(this);
     this.validateForm = this.validateForm.bind(this);
     this.pwHandleChange = this.pwHandleChange.bind(this);
   }
@@ -31,6 +31,8 @@ class SignUpContainer extends Component {
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
+
+    this.validateForm(event);
 
     this.setState({
       user,
@@ -41,6 +43,8 @@ class SignUpContainer extends Component {
     const field = event.target.name;
     const user = this.state.user;
     user[field] = event.target.value;
+
+    this.validateForm(event);
 
     this.setState({
       user,
@@ -62,7 +66,7 @@ class SignUpContainer extends Component {
     }
   }
 
-  submitSignup(user) {
+  submitForm(user) {
     console.log(user + 'test');
   }
 
@@ -78,7 +82,6 @@ class SignUpContainer extends Component {
         pw: this.state.user.password,
         email: this.state.user.email,
       };
-      this.submitSignup(user);
     } else {
       const errors = payload.errors;
       this.setState({
@@ -101,7 +104,7 @@ class SignUpContainer extends Component {
     return (
         <div>
           <SignUpForm
-              onSubmit={this.validateForm}
+              onSubmit={this.submitForm}
               onChange={this.handleChange}
               onPwChange={this.pwHandleChange}
               errors={this.state.errors}
